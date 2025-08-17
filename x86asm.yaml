@@ -1,0 +1,22 @@
+# VM Configuration file
+
+arch: "x86_64"        # fuerza VM Intel en host ARM (modo lento, pero compatible)
+cpus: 2
+memory: "2GiB"
+disk: "12GiB"
+
+images:
+  - location: "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+    arch: "x86_64"
+
+mounts:
+  - location: "~/workspace/itbaworkspace/arquitectura"
+    writable: true
+
+# Paquetes esenciales en el primer arranque
+provision:
+  - mode: system
+    script: |
+      apt-get update
+      DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        build-essential nasm gdb strace file
