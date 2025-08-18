@@ -12,6 +12,7 @@ El stack pointer register o extended stack pointer *apunta al tope* de la pila, 
 
 Cuando se almacena un nuevo valor en la pila con *PUSH* el valor del puntero se actualiza para siempre apuntar al tope de la pila
 
+El *EBP* (base pointer) siempre es mayor o igual al *ESP*
 
 == PUSH ...
 _Que pasa cuando se ejecuta esta instruccion?_
@@ -85,10 +86,124 @@ _Nota_: Cada frame es parte de la pila que estaria ocupada por cada funcion. *ES
 
 _Nota 2_: Los stacks de diferentes funciones se van apilando uno arriba del otro
 
+== Convenciones en C
+
+- Uso del registro *EBP* (base pointer)
+
+- Para poder acceder a los parametros y no perder informacion en el proceso, tenemos que hacer un *armado y desarmado de stack frame*
+
+\
+\
+\
+\
+\
+\
+\
+
+=== Armado de stack frame
+
+```asm
+
+push ebp
+mov ebp, esp
+
+```
+
+=== Desarmado de stack frame
+
+```asm
+mov esp, ebp
+pop ebp
+
+```
+
+=== Acceso a parametros
+
+```asm
+mov ax, [ebp + 8]
+
+```
+
+=== Valores a retornar
+
+- Menor a 32 bits retorna en EAX
+
+- Mayor a 32 bits retorna la parte alta de *EDX* y la parte baja en *EAX*
+
+- Dato mas complejo (ej. Estructura de datos) *retorna un puntero formado por EDX:EAX*
+
+== Llamada de C a ASM
+
+```C
+
+#include <stdio.h>
+
+// La palabra extern esta para que el linkeditor 
+// entienda que esta funcion no esta en este .c
+// sino que en otro archivo
+
+extern unsigned siete(void);
+
+int main(void) {
+  printf("Devuelve el numero siete = %d\n", siete());
+  return 0;
+}
+
+```
+
+```asm
+
+[GLOBAL siete]
+[SECTION .text]
+
+siete:
+  push ebp
+  mov ebp, esp
+  ...
+  ...
+
+```
+
+== Inline Assembler
+_Es una aberracion de la naturaleza_
+
+```C
+
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 20, result;
+
+    __asm__ (
+        "movl %1, %%eax;"   // mueve 'a' a eax
+        "addl %2, %%eax;"   // eax += b
+        "movl %%eax, %0;"   // resultado en 'result'
+        : "=r" (result)     // salida
+        : "r" (a), "r" (b)  // entradas
+        : "%eax"            // registros modificados
+    );
+
+    printf("Resultado: %d\n", result);
+    return 0;
+}
+
+```
+
+= Salidas en ASM
+
+- Veamos si se cumplen las convenciones de C analizando lo que genera el compilador
+
+- Tenemos dos formas de ver el codigo C convertido en ASM
+  - Compilar con "-S"
+  - Utilizar GDB
 
 = Claves
 
 - Todas las posiciones de memoria de Intel ocupan 1 Byte
 
 - Estandarizacion de espacio para *eficiencia de acceso* a coste de *espacio*
+
+- Armado y desarmado de stack frame
+
+- Variables en una funcion *estan en el stack*
 
