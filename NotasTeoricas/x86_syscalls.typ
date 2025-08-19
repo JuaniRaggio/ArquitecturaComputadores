@@ -24,6 +24,7 @@ _Posible salida (en mi VM con un hello world):_
 
 Para ver otras syscalls, se puede entrar en este #link("http://web.archive.org/web/20160213015253/http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html")[#underline[Link]].
 
+\
 
 = Secciones de un programa en assembler
 
@@ -31,5 +32,18 @@ Para ver otras syscalls, se puede entrar en este #link("http://web.archive.org/w
 
 - Codigo (_section .text_)
 
-#table(columns: 4)[Descripcion][Nombre en Codigo asm][Ejecutable?][Editable][Datos][_section .data_][*No*]
+== _En realidad..._
+La parte de data es la seccion "*editable pero no ejecutable*" del programa, mientras que la parte de text es la seccion "*no editable pero ejecutable*"
+
+#table(columns: 4)[Descripcion][Nombre en Codigo asm][Ejecutable?][Editable][Datos][_section .data_][*No*][*Si*][Codigo][_section .text_][*Si*][*No*]
+
+\
+
+= System call IDs
+
+- Todas las system calls tienen un ID que las representa
+
+- El *system call ID* debe ser ingresado en el registro *EAX* (? (Preguntar)
+
+
 
