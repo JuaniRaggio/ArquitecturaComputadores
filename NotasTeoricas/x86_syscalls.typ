@@ -22,8 +22,6 @@ _Posible salida (en mi VM con un hello world):_
 
 ```
 
-Para ver otras syscalls, se puede entrar en este #link("http://web.archive.org/web/20160213015253/http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html")[#underline[Link]].
-
 \
 
 = Secciones de un programa en assembler
@@ -31,6 +29,8 @@ Para ver otras syscalls, se puede entrar en este #link("http://web.archive.org/w
 - Datos (_section .data_)
 
 - Codigo (_section .text_)
+
+- .bss $->$ Better Save Space. No ocupa espacio en el binario pero es una seccion que se carga con ceros cuando se carga el programa en memoria
 
 == _En realidad..._
 La parte de data es la seccion "*editable pero no ejecutable*" del programa, mientras que la parte de text es la seccion "*no editable pero ejecutable*"
@@ -45,5 +45,11 @@ La parte de data es la seccion "*editable pero no ejecutable*" del programa, mie
 
 - El *system call ID* debe ser ingresado en el registro *EAX* (? (Preguntar)
 
+= Links utiles
 
+- #link("http://www.nasm.us/doc/nasmdoc3.html")[#underline[Directivas para reservar memoria, declarar datos y constantes]]
+
+- #link("http://stanislavs.org/helppc/")[#underline[Arquitectura de una PC Intel]]
+
+- #link("http://web.archive.org/web/20160213015253/http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html")[#underline[Para ver syscalls]].
 

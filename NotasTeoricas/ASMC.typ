@@ -104,23 +104,23 @@ _Nota 2_: Los stacks de diferentes funciones se van apilando uno arriba del otro
 
 ```asm
 
-push ebp
-mov ebp, esp
+  push ebp
+  mov ebp, esp
 
 ```
 
 === Desarmado de stack frame
 
 ```asm
-mov esp, ebp
-pop ebp
+  mov esp, ebp
+  pop ebp
 
 ```
 
 === Acceso a parametros
 
 ```asm
-mov ax, [ebp + 8]
+  mov ax, [ebp + 8]
 
 ```
 
@@ -169,6 +169,8 @@ _Es una aberracion de la naturaleza_
 
 ```C
 
+int main(void) {
+
 #include <stdio.h>
 
 int main() {
@@ -186,16 +188,9 @@ int main() {
     printf("Resultado: %d\n", result);
     return 0;
 }
+}
 
 ```
-
-= Salidas en ASM
-
-- Veamos si se cumplen las convenciones de C analizando lo que genera el compilador
-
-- Tenemos dos formas de ver el codigo C convertido en ASM
-  - Compilar con "-S"
-  - Utilizar GDB
 
 = Claves
 
@@ -204,6 +199,4 @@ int main() {
 - Estandarizacion de espacio para *eficiencia de acceso* a coste de *espacio*
 
 - Armado y desarmado de stack frame
-
-- Variables en una funcion *estan en el stack*
 
