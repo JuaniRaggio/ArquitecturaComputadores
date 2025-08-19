@@ -37,6 +37,3 @@ El pasaje de parámetros y retorno de datos es simplemente una convención. Por 
 tema de simplicidad, podemos empezar a trabajar pasando parámetros por registros
 y retornando los datos en eax.
 
-
-
-

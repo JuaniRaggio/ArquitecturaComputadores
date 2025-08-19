@@ -31,7 +31,8 @@ longitud equ $-cadena
 
 
 section .bss
+; Aca se declara memoria para variables que no 
+; necesitan un valor inicial especifico
 
 placeholder resb 10
-
 

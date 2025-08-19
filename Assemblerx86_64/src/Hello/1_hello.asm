@@ -29,10 +29,10 @@ print:
 
 section .data
 
-cadena db "Hola Mundo!!", 10	; "Hola Mundo!!\n"
-longitud equ $-cadena
-cadena_2 db "Arquitectura de Computadoras", 10
-cadena_2_len equ $-cadena_2
+    cadena db "Hola Mundo!!", 10	; "Hola Mundo!!\n"
+    longitud equ $-cadena
+    cadena_2 db "Arquitectura de Computadoras", 10
+    cadena_2_len equ $-cadena_2
 
 
 section .bss
