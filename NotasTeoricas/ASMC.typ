@@ -124,6 +124,32 @@ _Nota 2_: Los stacks de diferentes funciones se van apilando uno arriba del otro
 
 ```
 
+\
+
+=== Importancia de dejar el stack como estaba
+
+Cuando se llama a una funcion, es buena práctica, *dejar el estado del procesador
+como se recibió*.
+
+Considere un caso, donde hay un ciclo que compara con el flag
+Z, que llama a una función, que lo altera.
+
+```yasm
+Ej:
+  ...
+  dec ecx
+  call procesar	
+  jz fin
+
+fin:	
+  ...
+```
+
+Suponiendo que *procesar* es una función que recibe por ecx un numero, (el del
+contador, que se espera que llegue a 0) y resulta que *realiza operaciones que
+cambian el flag Z*, un programador podría pasar inadverdido, y jamas terminar el
+ciclo.
+
 === Valores a retornar
 
 - Menor a 32 bits retorna en EAX
@@ -191,6 +217,7 @@ int main() {
 }
 
 ```
+
 
 = Claves
 
