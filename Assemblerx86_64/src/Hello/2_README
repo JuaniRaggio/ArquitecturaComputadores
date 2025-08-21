@@ -73,6 +73,3 @@ funcion2:
 Las etiquetas loop, se llaman igual, ¿A donde salta el jmp?. Salta a la que
 corresponde por ser local.
 
-
-
-

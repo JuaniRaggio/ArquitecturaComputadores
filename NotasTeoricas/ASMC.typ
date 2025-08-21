@@ -103,10 +103,8 @@ _Nota 2_: Los stacks de diferentes funciones se van apilando uno arriba del otro
 === Armado de stack frame
 
 ```asm
-
   push ebp
   mov ebp, esp
-
 ```
 
 === Desarmado de stack frame
@@ -114,14 +112,12 @@ _Nota 2_: Los stacks de diferentes funciones se van apilando uno arriba del otro
 ```asm
   mov esp, ebp
   pop ebp
-
 ```
 
 === Acceso a parametros
 
 ```asm
   mov ax, [ebp + 8]
-
 ```
 
 \
@@ -214,7 +210,6 @@ int main() {
     printf("Resultado: %d\n", result);
     return 0;
 }
-}
 
 ```
 
@@ -226,4 +221,8 @@ int main() {
 - Estandarizacion de espacio para *eficiencia de acceso* a coste de *espacio*
 
 - Armado y desarmado de stack frame
+
+- La convencion de backup de registros o no depende de cada uno y si el sistema necesita optimizaciones, es preferible evitarlo
+
+- Accesso a letra dentro de un string, *usar registros de 8 bits*
 

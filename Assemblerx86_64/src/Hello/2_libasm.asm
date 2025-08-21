@@ -37,7 +37,7 @@ exit:
 
 
 ;===============================================================================
-; exit - calcula la longitud de una cadena terminada con 0
+; strlen - calcula la longitud de una cadena terminada con 0
 ;===============================================================================
 ; Argumentos:
 ;	ebx: puntero a la cadena
