@@ -213,6 +213,11 @@ int main() {
 
 ```
 
+- `DWORD PTR registro` $->$ Le dice al procesador que lo guarde como 32 bits
+
+= Links utiles
+
+- #link("https://godbolt.org")[#underline[Pasaje en vivo de C a asm]]
 
 = Claves
 
@@ -225,4 +230,14 @@ int main() {
 - La convencion de backup de registros o no depende de cada uno y si el sistema necesita optimizaciones, es preferible evitarlo
 
 - Accesso a letra dentro de un string, *usar registros de 8 bits*
+
+- Retorno de valores por *EAX* (convencion de C)
+
+- No entra en *EAX* $->$ usa tambien *EBX*, sino se envia un puntero
+
+- Cuando se hace `sub esp, 32`, se estan restando 32 bytes
+
+- Vamos a usar siempre parametros de 4 bytes siempre y cuendo estemos programando en 32 bits
+
+- Hacer el seguimiento de la pila y no borrar lo que ya se escribio
 
