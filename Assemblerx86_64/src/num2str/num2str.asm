@@ -47,6 +47,7 @@ pop_data:
     cmp ecx, ebx ;; Comparo el iterador con la cantidad de digitos que tiene el numero
     jg pop_data ;; Si ecx (cantidad de digitos) es mayor ebx (iterador), sigo en el loop
     mov byte [edi + ebx], 0 ;; Agregar el cero final
+    inc ebx
 
 
 end:
