@@ -12,6 +12,7 @@ sumn:
     mov ebp, esp ;; New Base pointer (Nueva base de stack)
     ;; En ebp + 8 tenemos el primer parametro, en ebp + 4 se tiene la direccion de retorno
     xor eax, eax
+    mov ebx, [ebp + 8] ;; Copia del @n
 
     ;; ERROR:
     ;; El problema de leer de "entrada estandar" es que
@@ -20,9 +21,9 @@ sumn:
     ;; ya que num2str recibe un numero
 
 sum:
-    add eax, [ebp + 8] ;; Agrego el digito
+    add eax, ebx ;; Agrego el digito
     jo error_exit ;; Si hubo overflow, salto al error
-    dec [ebp + 8] ;; Decremento el @n
+    dec ebx ;; Decremento el @n
     jnz sum ;; Si no se hizo 0 el @n, sigo en el loop
     push buffer ;; Pusheo la zona de memoria
     push eax ;; Pusheo el numero a escribir
