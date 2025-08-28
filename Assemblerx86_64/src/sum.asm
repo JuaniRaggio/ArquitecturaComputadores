@@ -56,5 +56,7 @@ error_exit:
 section .data
     of_error db "Overflow!", 10
     error_length equ $ - of_error
+
+section .bss
     buffer resb 32
 
