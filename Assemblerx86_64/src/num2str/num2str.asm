@@ -1,5 +1,6 @@
+;; Supongo que @{numero} sea positivo, despues lo extiendo
 ;; @num2str
-;; función que recibe un @número y una @zona_de_memoria, y
+;; función que recibe un @{número} y una @{zona_de_memoria}, y
 ;; transforma el número en un string,
 ;; terminado con cero, en la zona de memoria pasada
 ;; como parámetro
@@ -12,58 +13,41 @@ num2str:
     ;; Armado de stack frame
     push ebp ;; Backup del base pointer
     mov ebp, esp ;; Muevo al base pointer a la base del stack de esta funcion
-    ;; Acceso a parametros -> por ebp
-    ;; Los parametros vamos a suponer que son todos de 4 bytes
-    ;; En ebp + 4 (Bytes) -> Retorno (Porque pusheamos el ebp del SO)
+    mov eax, [ebp + 8] ;; Me guardo una copia del numero
+    mov edi, [ebp + 12]
+    mov ebx, 10 ;; Divisor
+    mov ecx, 0 ;; Contador
 
-    mov edx, 0 ;; edx va a ser el offset
-    cmp dword [ebp + 12], 0
-    ja positive
-
-;; Recordar que para el resto, se usa:
-;; A/B => A = B * C + Resto => Resto = A - B * C
-
-negative:
-    push ebp + 12
-
-    push [ebp + 8]
-    push 31
-    call put_char
 
 positive:
+    xor edx, edx
+    div ebx ;; Div toma a eax como numerador y guarda el resto en edx
+    add edx, '0' ;; Le sumo al numero para que represente el ascii
+    push edx ;; Empujo el caracter al stack
+    inc ecx ;; Aumento el contador
+    cmp eax, 0 ;; Comparo el numero con 0
+    jg positive ;; Si el numero sigue siendo mayor a 0 despues de la division, sigo en el loop
+    
 
+    xor ebx, ebx
+pop_data:
+    ;; Aca faltaria popear todos los chars 
+    ;; que se pushearon de forma inversa
+    pop eax ;; Levanto el numero que tengo que escribir (Me queda el char en AL)
+    mov [edi + ebx], al
+    inc ebx ;; Aumento el iterador
+    cmp ecx, ebx ;; Comparo el iterador con la cantidad de digitos que tiene el numero
+    jg pop_data ;; Si ecx (cantidad de digitos) es mayor ebx (iterador), sigo en el loop
+    mov byte [edi + ebx], 0 ;; Agregar el cero final
+
+
+end:
     ;; Desarmado de stack frame
     mov esp, ebp
     pop ebp
     ret
 
-get_next_digit:
-    ;; Recibe por stack un numero
-    ;; Deja en AL el siguiente digito en forma de char
-
-
-put_char: 
-    ;; Recibe en AL el char a colocar
-    ;; en el stack: zona_de_memoria_a_escribir, offset (Donde colocar el char)
-    push ebp
-    mov ebp, esp
-
-    mov ebx, [ebp + 8] ;; Muevo a ebx, la direccion de memoria donde comienza el string
-
-    mov ecx, [ebp + 12] ;; Muevo a ecx, el offset (donde deberia escribirse el char)
-
-    mov [ebx + ecx], al
-
-    ;; ESTO ESTA MAL
-    ; mov [ebp + 8] + ebp + 12, al
-
-    mov esp, ebp
-    pop ebp
-    ret
-
-section .data
-    sign db '-'
-
-section .bss ;; Better Save Space
-    buffer resb 32
-
+; Para microoptimizaciones, es preferible usar magic numbers
+; section .data
+;     divisor dd 10
+;     num_ascii_gap db '0'
