@@ -48,7 +48,7 @@ pop_data:
     jg pop_data ;; Si ecx (cantidad de digitos) es mayor ebx (iterador), sigo en el loop
     mov byte [edi + ebx], 0 ;; Agregar el cero final
     inc ebx
-
+    mov edx, ebx
 
 end:
     ;; Desarmado de stack frame

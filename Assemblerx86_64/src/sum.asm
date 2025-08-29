@@ -30,7 +30,7 @@ sum:
     call num2str
     mov eax, 4
     mov ecx, buffer ;; Muevo a ecx el puntero al inicio del string
-    mov edx, ebx ;; num2str me deja en ebx el length del string
+    ;; num2str me deja en edx el length del string
     xor ebx, ebx ;; 0 exit code (No problemo)
 
 

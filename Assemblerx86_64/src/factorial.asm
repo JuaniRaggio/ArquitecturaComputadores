@@ -7,11 +7,11 @@ global factorial
 ;; Recibo @n por stack
 ;; Si es negativo o 0, retorna 1
 
+
 factorial:
     ;; Armado de stackframe
     push ebp
     mov ebp, esp
-
     ;; Guardo copia del @n en el eax (registro de salida por convencion de C)
     mov eax, [ebp + 8]
     ;; Guardo copia de la copia, para usar de multiplicador
@@ -20,22 +20,33 @@ factorial:
     cmp eax, 1 ;; Comparo el parametro ingresado con 1
     jle zero_case ;; Si el parametro que me pasan es menor o igual a 1, voy al caso de zero
 
+
 .multiplication_loop:
     mul ebx ;; Multiplica eax con ebx y deja la respuesta en eax
     dec ebx
     jnz .multiplication_loop
 
-.print_number:
-    
+
+print_number:
+    push buffer
+    push eax
+    call num2str ;; num2str ya me deja en edx el size
+    ;; Write syscall
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, buffer
+    int 80h
 
 end:
+    mov esp, ebp
+    pop ebp
+    ret
 
 
 zero_case:
     mov eax, 1
-    jmp end
+    jmp print_number
 
-section .data
 
 section .bss
     buffer resb 32
