@@ -23,7 +23,7 @@ factorial:
 
 .multiplication_loop:
     mul ebx ;; Multiplica eax con ebx y deja la respuesta en eax
-    dec ebx
+    dec ebx ;; Decremento el "iterador" que en realidad es el multiplicador
     jnz .multiplication_loop
 
 
@@ -38,6 +38,7 @@ print_number:
     int 80h
 
 end:
+    ;; Desarmado de stack frame
     mov esp, ebp
     pop ebp
     ret
