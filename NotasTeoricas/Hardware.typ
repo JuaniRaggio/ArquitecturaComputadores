@@ -1,4 +1,4 @@
-= Transmision digital
+#align(center)[= Transmision digital]
 
 Hay muchas representaciones e interpretaciones que se le pueden dar al codigo
 binario, por ejemplo puede significarse:
@@ -24,11 +24,11 @@ $ "Reciever" <- 0 1 0 1 1 0 1 0 1 1 1 <- "Sender" $
 
 == Von Neumann
 
-#table(columns: 3)[Memoria de codigo y de datos][$<=$ Buses $=>$][CPU]
+#table(columns: 3)[Memoria de codigo y de datos][$<-$ Buses $->$][CPU]
 
 == Harvard
 
-#table(columns: 3)[Memoria de codigo y de datos][$<=$ Buses $=>$][CPU]
+#table(columns: 3)[Memoria de codigo y de datos][$<-$ Buses $->$][CPU]
 
 Vas al codigo y lo tenes de un lado, vas del otro lado y tenes los datos
 
@@ -368,7 +368,83 @@ Necesitas:
 _Que valores tiene una memoria al energizarse?_
 
 
-= Memorias - Tipos de memorias
+#align(center)[= Memorias - Tipos de memorias]
+
+= Clasificacion de memorias
+
+== ROM
+
+_En principio eran *Read-only Memory*, hoy si son escribibles_
+
+- No pierden la informacion
+
+- Son *muy lentas* en lectura y escritura, por la condicion de que no se pierda la informacion
+
+\
+
+== RAM
+
+- Pierden la informacion totalmente
+
+- Son *muy rapidas* en lectura y escritura
+
+- Refresca la informacion (se lee y vuelve a escribir)
+
+\
+
+=== DRAM
+
+- Necesitan refrescado de energia cada n milisegundos porque no se mantienen durante mucho tiempo (por perdida de energia electrica)
+
+- Menos compleja. Mas economica
+
+- Mas lenta
+
+\
+
+=== SRAM
+
+- No necesita refresco
+
+- Mas compleja, mas costosa
+
+- Mas rapida
+
+- Se suele utilizar para *memoria cache*
+
+_SDRAM (Synchronous DRAM)_
+
+\
+
+== Memorias - Tiempo de acceso
+
+- _Quien es el que te trae la informacion?_ *El controlador*, es parte de la memoria y es quien "busca los datos y los trae"
+
+- *Latencia*: Tiempo que tarda en devolver el valor la memoria (a partir de cuando lo pedis)
+
+- *Transferencia*: Tiempo que tarda en viajar por el bus
+
+\
+
+= Memorias - Estructura
+
+_Por que despues de haber agrandado el bus de datos tanto, la division de memoria se mantuvo en 1 Byte?_
+
+_En *Intel*_
+
+- *Retrocompatibilidad*
+
+- Permite acceder a la memoria a *nivel byte*
+
+- Se puede acceder de a 2 Bytes a la vez con AX y tambien se mantiene el acceso a 1 Byte con AL
+
+
+
+
+
+
+
+
 
 
 
