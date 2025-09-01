@@ -20,7 +20,7 @@ $ "Reciever" <- 0 1 0 1 1 0 1 0 1 1 1 <- "Sender" $
 #align(center)[#table(columns: 3)[Reciever][#table(columns: 1)[$ <- 0 1 0 1 ... <- $][$ <- 0 1 0 1 ... <- $][$ <- 0 1 0 1 ... <- $]][Sender]]
 
 
-= Tipos de Arquitectura
+#align(center)[= Tipos de Arquitectura]
 
 == Von Neumann
 
@@ -275,7 +275,7 @@ mov [2000h], bl
 
 \
 
-= Mapa de memoria
+#align(center)[= Mapa de memoria]
 
 Todas las direcciones que puede acceder una CPU
 
@@ -354,6 +354,9 @@ Necesitas:
 - Memoria
 
 
+#align(center)[= Memorias - Tipos de memorias]
+
+
 = Memoria RAM
 
 - Memoria volatil que se pierde cada vez que inicias la computadora
@@ -367,8 +370,6 @@ Necesitas:
 
 _Que valores tiene una memoria al energizarse?_
 
-
-#align(center)[= Memorias - Tipos de memorias]
 
 = Clasificacion de memorias
 
@@ -438,43 +439,188 @@ _En *Intel*_
 
 - Se puede acceder de a 2 Bytes a la vez con AX y tambien se mantiene el acceso a 1 Byte con AL
 
+\
 
+= Memoria comercial - SRAM
 
+#import "@preview/cetz:0.3.1": canvas, draw
 
+#let draw-ic-chip() = {
+  align(center)[
+    #canvas(length: 0.8cm, {
+      import draw: *
+      
+      let chip-width = 3
+      let chip-height = 7
+      let pin-length = 0.5
+      let pin-spacing = 0.5
+      let notch-width = 0.6
+      let notch-height = 0.3
+      
+      // Posición central del chip
+      let cx = 0
+      let cy = 0
+      
+      rect(
+        (cx - chip-width/2, cy - chip-height/2),
+        (cx + chip-width/2, cy + chip-height/2),
+        fill: rgb("#808080"),
+        stroke: black + 1pt
+      )
+      
+      bezier(
+        (cx - notch-width/2, cy + chip-height/2),
+        (cx + notch-width/2, cy + chip-height/2),
+        (cx - notch-width/2, cy + chip-height/2 - notch-height),
+        (cx + notch-width/2, cy + chip-height/2 - notch-height),
+        stroke: black + 1pt
+      )
+      
+      // Texto central del chip
+      content(
+        (cx, cy + 0.5),
+        text(size: 12pt, fill: white, weight: "bold")[TMS4016]
+      )
+      
+      // Dibujar pines y etiquetas del lado izquierdo
+      let left-pins = (
+        ("1", "A#sub[7]", rgb("#4A4A9F")),
+        ("2", "A#sub[6]", rgb("#4A4A9F")),
+        ("3", "A#sub[5]", rgb("#4A4A9F")),
+        ("4", "A#sub[4]", rgb("#4A4A9F")),
+        ("5", "A#sub[3]", rgb("#4A4A9F")),
+        ("6", "A#sub[2]", rgb("#4A4A9F")),
+        ("7", "A#sub[1]", rgb("#4A4A9F")),
+        ("8", "A#sub[0]", rgb("#4A4A9F")),
+        ("9", "DQ#sub[1]", rgb("#B85450")),
+        ("10", "DQ#sub[2]", rgb("#B85450")),
+        ("11", "DQ#sub[3]", rgb("#B85450")),
+        ("12", "GND", rgb("#808080"))
+      )
+      
+      for (i, pin) in left-pins.enumerate() {
+        let y-pos = cy + chip-height/2 - 0.7 - (i * pin-spacing)
+        
+        // Línea del pin
+        line(
+          (cx - chip-width/2 - pin-length, y-pos),
+          (cx - chip-width/2, y-pos),
+          stroke: black + 1pt
+        )
+        
+        // Número del pin (dentro del chip)
+        content(
+          (cx - chip-width/2 + 0.3, y-pos),
+          text(size: 8pt, fill: white)[#pin.at(0)]
+        )
+        
+        // Etiqueta del pin (fuera del chip)
+        content(
+          (cx - chip-width/2 - pin-length - 0.5, y-pos),
+          text(size: 9pt, fill: pin.at(2), weight: "bold")[#pin.at(1)]
+        )
+      }
+      
+      // Dibujar pines y etiquetas del lado derecho
+      let right-pins = (
+        ("24", "V#sub[CC]", rgb("#808080")),
+        ("23", "A#sub[8]", rgb("#4A4A9F")),
+        ("22", "A#sub[9]", rgb("#4A4A9F")),
+        ("21", "W", rgb("#8BC34A")),
+        ("20", "G", rgb("#9C27B0")),
+        ("19", "A#sub[10]", rgb("#4A4A9F")),
+        ("18", "S", rgb("#00BCD4")),
+        ("17", "DQ#sub[8]", rgb("#B85450")),
+        ("16", "DQ#sub[7]", rgb("#B85450")),
+        ("15", "DQ#sub[6]", rgb("#B85450")),
+        ("14", "DQ#sub[5]", rgb("#B85450")),
+        ("13", "DQ#sub[4]", rgb("#B85450"))
+      )
+      
+      for (i, pin) in right-pins.enumerate() {
+        let y-pos = cy + chip-height/2 - 0.7 - (i * pin-spacing)
+        
+        // Línea del pin
+        line(
+          (cx + chip-width/2, y-pos),
+          (cx + chip-width/2 + pin-length, y-pos),
+          stroke: black + 1pt
+        )
+        
+        // Número del pin (dentro del chip)
+        content(
+          (cx + chip-width/2 - 0.3, y-pos),
+          text(size: 8pt, fill: white)[#pin.at(0)]
+        )
+        
+        // Etiqueta del pin (fuera del chip)
+        content(
+          (cx + chip-width/2 + pin-length + 0.5, y-pos),
+          text(size: 9pt, fill: pin.at(2), weight: "bold")[#pin.at(1)]
+        )
+      }
+      
+      // Título debajo del chip
+      content(
+        (cx, cy - chip-height/2 - 0.8),
+        text(size: 11pt, weight: "bold")[2K × 8 SRAM]
+      )
+    })
+  ]
+}
 
+// Función para dibujar la tabla de funciones
+#let draw-pin-table() = {
+  align(center)[
+    #table(
+      columns: (auto, auto),
+      inset: 10pt,
+      align: (center, center),
+      stroke: 1pt,
+      
+      // Encabezados
+      table.cell(fill: rgb("#E0E0E0"))[*Pin(s)*],
+      table.cell(fill: rgb("#E0E0E0"))[*Function*],
+      
+      // Filas de la tabla
+      text(fill: rgb("#4A4A9F"))[A#sub[0]-A#sub[10]],
+      [Address],
+      
+      text(fill: rgb("#B85450"))[DQ#sub[0]-DQ#sub[7]],
+      [Data In/Data Out],
+      
+      text(fill: rgb("#00BCD4"))[S (CS)],
+      [Chip Select],
+      
+      text(fill: rgb("#9C27B0"))[G (OE)],
+      [Read Enable],
+      
+      text(fill: rgb("#8BC34A"))[W (WE)],
+      [Write Enable],
+    )
+  ]
+}
 
+// Composición final del diagrama
+#block(
+  // fill: rgb("#606060"),
+  inset: 20pt,
+  // radius: 5pt,
+  width: 100%,
+  [
+    #draw-ic-chip()
+    #v(1em)
+    #draw-pin-table()
+  ]
+)
 
+- $ 2K = 2.2^10 = 2^11 $
 
+- _Quiere decir que el bus de address es de 11 bits_
 
+= Como el CPU interactua con la memoria?
 
+- Se conecta a la memoria y en realidad el CPU no tiene idea de cuantos bits es la memoria, sabe que a travez de los busses, va a recibir informacion y la tiene que guardar en el IP, que va a recibir un flag para saber si tiene que leer o escribir, etc
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- La "interfaz" que esta entre la memoria y el CPU la vamos a ver en la proxima clase
 
