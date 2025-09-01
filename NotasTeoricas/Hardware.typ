@@ -337,7 +337,38 @@ bits* porque son los que terminan apuntando a la memoria.
 #align(center)[#table[$ #sym.therefore "Las \"patitas\" estan directamente relacionadas a los punteros que usa el procesador" $]]
 
 
+= Para pensar
 
+- *IP*
+
+_Cual es la primera instruccion que ejecuta el micro al encenderse?_
+
+== Quiero armar una compu
+
+Necesitas:
+
+- CPU
+  - Instruction Pointer (_Al inicio donde apunta?_)
+    - Address Bus
+
+- Memoria
+
+
+= Memoria RAM
+
+- Memoria volatil que se pierde cada vez que inicias la computadora
+
+- Arranca vacia
+
+= Memoria ROM
+
+- Memoria no volatil que cuando se apaga la computadora, se mantiene esa informacion
+
+
+_Que valores tiene una memoria al energizarse?_
+
+
+= Memorias - Tipos de memorias
 
 
 
