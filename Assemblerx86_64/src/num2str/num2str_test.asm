@@ -3,9 +3,7 @@ section .text ;; Codigo
 global _start
 
 _start:
-    ;; ...
-    call num2str
-    ;; ...
+
 
 .exit:
     mov eax, 1
