@@ -622,5 +622,5 @@ _En *Intel*_
 
 - Se conecta a la memoria y en realidad el CPU no tiene idea de cuantos bits es la memoria, sabe que a travez de los busses, va a recibir informacion y la tiene que guardar en el IP, que va a recibir un flag para saber si tiene que leer o escribir, etc
 
-- La "interfaz" que esta entre la memoria y el CPU la vamos a ver en la proxima clase
+- La "interfaz" que esta entre la memoria y el CPU la vamos a ver en la proxima clase y se llama *circuito decodificador*
 
