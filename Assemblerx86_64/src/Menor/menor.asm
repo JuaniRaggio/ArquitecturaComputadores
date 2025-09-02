@@ -2,7 +2,8 @@
 ;; de 4 bytes, encuentre el menor, y lo imprima por salida estándar.
 
 ;;; Esta hecho para numeros positivos, para negativos lo que habria que
-;;; cambiar es que eax se inicialice con FFFF
+;;; cambiar es que eax se inicialice con FFFF y el num2str para que tambien
+;;; funcione con negativos
 
 extern num2str
 global _start
@@ -29,10 +30,15 @@ end:
         push eax                ; Numero segundo => aparece arriba del buffer
         call num2str            ; Recibe mas arriba el numero primero y la zona de memoria despues
         ;; num2str ya me deja en edx el size del string a printear
+
+        ;; Write syscall
         mov eax, 4
         mov ebx, 1
         mov ecx, buffer
 
+        ;; Exit syscall
+        mov eax, 1
+        mov ebx, 0
 
 section .data
         array dd 1, 2, 10, 3, 1, 0, 1, 23, 40
