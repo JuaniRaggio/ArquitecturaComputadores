@@ -31,6 +31,7 @@ sum:
     mov eax, 4
     mov ecx, buffer ;; Muevo a ecx el puntero al inicio del string
     ;; num2str me deja en edx el length del string
+    int 80h
     xor ebx, ebx ;; 0 exit code (No problemo)
 
 
