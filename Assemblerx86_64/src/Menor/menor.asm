@@ -35,10 +35,12 @@ end:
         mov eax, 4
         mov ebx, 1
         mov ecx, buffer
+        int 80h
 
         ;; Exit syscall
         mov eax, 1
         mov ebx, 0
+        int 80h
 
 section .data
         array dd 1, 2, 10, 3, 1, 0, 1, 23, 40
