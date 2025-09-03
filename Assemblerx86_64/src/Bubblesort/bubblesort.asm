@@ -5,9 +5,10 @@ section .bss
 
 section .text
 global _start
-global bubble_sort
+global bubblesort
 
 _start:
+
 
 
 bubble_sort:
