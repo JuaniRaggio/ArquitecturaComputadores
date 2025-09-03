@@ -1,9 +1,9 @@
-;; Supongo que @{numero} sea positivo, despues lo extiendo
-;; @num2str
-;; función que recibe un @{número} y una @{zona_de_memoria}, y
-;; transforma el número en un string,
-;; terminado con cero, en la zona de memoria pasada
-;; como parámetro
+;; función que recibe un número positivo y una zona_de_memoria, y
+;; transforma el número en un string terminado con cero
+;; - IN: numero (positivo), zona_de_memoria - parámetros de entrada
+;; - OUT: void - modifica zona_de_memoria, deja length en edx
+;; - STACK: numero(ebp+8), zona_de_memoria(ebp+12)
+;; - REG: eax=numero, edi=puntero_memoria, ebx=divisor, ecx=contador
 
 section .text ;; Codigo
 
@@ -22,8 +22,8 @@ num2str:
 zero_special:
     cmp eax, 0
     jne positive
-    mov [edi], '0'
-    mov [edi + 1], 0
+    mov byte [edi], '0'
+    mov byte [edi + 1], 0
     jmp end
 
 

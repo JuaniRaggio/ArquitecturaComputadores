@@ -20,8 +20,12 @@ multiplos:
         mov ebx, [ebp + 12]     ; Inicializacion del contador
 
 .print_results:
-        push eax                ; Push number first
+        push buffer             ; Pusheo el buffer en donde escribir
+        push eax                ; Pusheo multiplo
+        call num2str            ; Recibe (n, zona_memoria)
         add eax, eax
+        dec ebx
+        jnz .print_results
 
 .stack_results:
         mult ebx
@@ -37,3 +41,4 @@ multiplos:
 section .data
 
 section .bss
+        buffer resb 32          ; 32 digitos igual es una banda

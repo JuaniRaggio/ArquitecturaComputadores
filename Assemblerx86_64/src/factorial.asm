@@ -1,11 +1,15 @@
 section .text
 
+extern num2str
+
 global factorial
 
 ;; Dado un número n, imprimir su factorial.
 ;; Tenga cuidado con los argumentos de la función.
-;; Recibo @n por stack
-;; Si es negativo o 0, retorna 1
+;; - IN: n - número para calcular factorial
+;; - OUT: void - imprime resultado por stdout
+;; - STACK: n(ebp+8) - parámetro de entrada
+;; - REG: eax=resultado, ebx=multiplicador
 
 
 factorial:

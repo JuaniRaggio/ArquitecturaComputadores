@@ -1,6 +1,9 @@
 ; Dado un número n, imprimir la suma de los primeros 
 ; n números naturales (No utilizar una fórmula).
-; @n se recibe por stack y supongo parametro de 4 bytes
+; - IN: n - número de términos a sumar
+; - OUT: void - imprime resultado por stdout
+; - STACK: n(ebp+8) - parámetro de entrada
+; - REG: eax=acumulador, ebx=contador
 
 section .text ;; Codigo
 
@@ -24,7 +27,8 @@ sum:
     add eax, ebx ;; Agrego el digito
     jo error_exit ;; Si hubo overflow, salto al error
     dec ebx ;; Decremento el @n
-    jnz sum ;; Si no se hizo 0 el @n, sigo en el loop
+    cmp ebx, 0
+    jg sum ;; Si no se hizo 0 el @n, sigo en el loop
     push buffer ;; Pusheo la zona de memoria
     push eax ;; Pusheo el numero a escribir
     call num2str

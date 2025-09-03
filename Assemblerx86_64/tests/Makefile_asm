@@ -1,0 +1,82 @@
+# Makefile para compilar y ejecutar tests de assembler (puro assembly)
+
+ASM = nasm
+LD = ld
+ASMFLAGS = -f elf32
+LDFLAGS = -m elf_i386
+
+# Directorios
+SRC_DIR = ../src
+TEST_DIR = .
+
+# Targets principales
+all: test_factorial test_num2str test_sum test_menor_standalone
+
+# Test para factorial (assembly)
+test_factorial: $(TEST_DIR)/test_factorial.o $(SRC_DIR)/factorial.o $(SRC_DIR)/num2str/num2str.o
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Test para num2str (assembly)
+test_num2str: $(TEST_DIR)/test_num2str.o $(SRC_DIR)/num2str/num2str.o
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Test para sum (assembly)
+test_sum: $(TEST_DIR)/test_sum.o $(SRC_DIR)/SumaN/sum.o $(SRC_DIR)/num2str/num2str.o
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Programa standalone para menor (no usa función sino _start)
+test_menor_standalone: $(SRC_DIR)/Menor/menor.o $(SRC_DIR)/num2str/num2str.o
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Compilar archivos .asm a .o (source)
+$(SRC_DIR)/factorial.o: $(SRC_DIR)/factorial.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+$(SRC_DIR)/num2str/num2str.o: $(SRC_DIR)/num2str/num2str.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+$(SRC_DIR)/SumaN/sum.o: $(SRC_DIR)/SumaN/sum.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+$(SRC_DIR)/Menor/menor.o: $(SRC_DIR)/Menor/menor.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+# Compilar archivos test .asm a .o
+$(TEST_DIR)/test_factorial.o: $(TEST_DIR)/test_factorial.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+$(TEST_DIR)/test_num2str.o: $(TEST_DIR)/test_num2str.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+$(TEST_DIR)/test_sum.o: $(TEST_DIR)/test_sum.asm
+	$(ASM) $(ASMFLAGS) -o $@ $<
+
+# Ejecutar tests
+run_all: all
+	@echo "=== Ejecutando todos los tests ==="
+	@echo ""
+	./test_factorial
+	@echo ""
+	./test_num2str
+	@echo ""
+	./test_sum
+	@echo ""
+	@echo "=== Test Menor (programa standalone) ==="
+	./test_menor_standalone
+
+# Limpiar archivos compilados
+clean:
+	rm -f $(SRC_DIR)/*.o
+	rm -f $(SRC_DIR)/*/*.o
+	rm -f $(TEST_DIR)/*.o
+	rm -f test_factorial test_num2str test_sum test_menor_standalone
+
+# Mostrar ayuda
+help:
+	@echo "Targets disponibles:"
+	@echo "  all          - Compilar todos los tests"
+	@echo "  run_all      - Compilar y ejecutar todos los tests"
+	@echo "  clean        - Limpiar archivos compilados"
+	@echo "  help         - Mostrar esta ayuda"
+
+.PHONY: all run_all clean help

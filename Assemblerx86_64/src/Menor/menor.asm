@@ -1,5 +1,9 @@
 ;; Escribir un programa que dado un array de números enteros,
 ;; de 4 bytes, encuentre el menor, y lo imprima por salida estándar.
+;; - IN: array - array de números enteros (hardcodeado)
+;; - OUT: void - imprime el menor por stdout
+;; - STACK: ninguno - programa principal
+;; - REG: eax=menor_actual, esi=puntero_array
 
 ;;; Esta hecho para numeros positivos, para negativos lo que habria que
 ;;; cambiar es que eax se inicialice con FFFF y el num2str para que tambien
@@ -47,5 +51,4 @@ section .data
         end_of_array equ $
 
 section .bss
-        array resb 32
         buffer resb 32
