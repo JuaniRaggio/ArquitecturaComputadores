@@ -1,8 +1,8 @@
 ;;; Escribir un programa que muestre en pantalla la cantidad de parametros que recibio por stack
 
-        section .text
-        global _start
-        extern num2str
+section .text
+global _start
+extern num2str
 
 write_buffer:
         ;; Espera tener edx seteado
@@ -29,23 +29,24 @@ write_buffer:
 _start:
         push ebp                ; Armado de stack frame
         mov ebp, esp            ; Armado de stack frame
-        push cantidad_msg       ; Mensaje de "Cantidad de argumentos: "
         mov edx, cantidad_length ; Muevo longitud del string a printear a edx
+        push cantidad_msg       ; Pusheo lo que tengo que escribir: "Cantidad de argumentos: "
         call write_buffer        ; Llamado a funcion write
-        mov ecx, 8               ; Inicializo contador para empezar en argc
+        mov ecx, 8
         mov ebx, [ebp + ecx]    ; Guardo el primer parametro (cantidad de argumentos)
         push buffer             ; Push buffer
         push ebx                ; Push primer parametro (cantidad de argumentos)
         call num2str
-        push buffer             ; Pusheo el buffer para el write_buffer
+        push buffer             ; Pusheo lo que tengo que escribir (ya esta volcado en el buffer por num2str)
         call write_buffer
 
+        xor eax, eax
 put_arguments:
         add ecx, 4              ; Aumento el contador para ir al siguiente argumento (primer argv)
 
         ;; Print new_line
         mov edx, new_line_length
-        push new_line
+        push new_line           ; Pusheo lo que tengo que escribir (una constante)
         call write_buffer
 
         ;; Print pre-number message
@@ -54,17 +55,29 @@ put_arguments:
         call write_buffer
 
         ;; Print number of argv (position from 0 to argc - 1)
-        mov
+        push buffer
+        push eax
+        call num2str
+        push buffer
+        call write_buffer
 
         ;; Print post-number message
         mov edx, post_num_length
         push post_num
         call write_buffer
 
+        ;; Print Argument (already a string)
         mov ebx, [ebp + ecx]    ; Cargo en ebx el argumento a printear
-        push buffer             ; Pusheo el buffer (segundo argumento para num2str)
-        push ebx                ; Pusheo el numero (primer argumento para num2str)
-        call num2str
+        push ebx                ; Pusheo el argumento
+        call write_buffer
+
+        inc eax                 ; Incremento el iterador
+        cmp eax, [ebp + 8]      ; Comparo el iterador con argc (cantidad de argumentos)
+        jne put_arguments
+
+        ;; Print new_line
+        mov edx, new_line_length
+        push new_line           ; Pusheo lo que tengo que escribir (una constante)
         call write_buffer
 
 end:
@@ -82,6 +95,7 @@ section .data
         pre_num_length equ $ - pre_num
         post_num db "]: "
         post_num_length equ $ - post_num
+        multiplier db 10
 
 section .bss
         buffer resb 32
