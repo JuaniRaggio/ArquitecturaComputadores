@@ -277,7 +277,7 @@ mov [2000h], bl
 
 #align(center)[= Mapa de memoria]
 
-Todas las direcciones que puede acceder una CPU
+Todas las direcciones que puede acceder una CPU. Si tenes mas memoria que la maxima direccion de memoria a la que podes acceder con cierto _Bus de Adress_
 
 #align(center)[#table(columns: 1)[RAM][ROM][Perifericos]]
 
