@@ -14,6 +14,7 @@ Se encuentra entre la CPU y la Memoria (ROM/RAM)
 
 - El disco es espacio extra para guardar informacion pero es *extremadamente lento*. Esa lentidud se la da la *persistencia*
 
+
 = Compuerta
 
 _Elemento fisico que hace el algebra de boole fisicamente -> Digitaliza el algebra de boole (las operaciones mas sencillas)_
@@ -38,6 +39,12 @@ _Elemento fisico que hace el algebra de boole fisicamente -> Digitaliza el algeb
 
   - *BUFFER*: Devuelve lo mismo. Condiciones electronicas: Perfecciona el grafico de voltaje
 
+
+= Ejercicio Decodificacion de ROM
+
+Se dispone de un microprocesador con 16 lineas de bus de direcciones y 8 lineas de bus de datos.
+
+Se desea conectar el procesador con dos integrados de ROM de $32 "K" times 8$
 
 
 
