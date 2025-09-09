@@ -1,0 +1,26 @@
+#+title: Ej18
+* Preguntas
+Un alumno que todavia no curso esta materia le pide a usted que le explique:
+1. Que es una system call? Quien la escribio? Donde se encuentran ubicadas?
+   - Es una llamada al sistema operativo para que ejecute ciertas tareas que requieren acceso a hardware
+   - El que hizo el sistema operativo
+   - En el Kernel
+
+2. Como se llama a una system call desde assembler de Linux? Muestre con un ejemplo de llamada a read
+   - Con una interrupcion con el codigo 80h
+
+#+begin_src asm
+section .data
+        buffer db "Hola", 10
+        length db $ - buffer
+
+section .text
+        mov eax, 3 ; syscall id
+        mov ebx, 1 ; File descriptor (stdout)
+        mov ecx, buffer ; Where to write
+        mov edx, length
+#+end_src
+
+3. Que es el numero de ID?
+   Es un numero identificador unico, para cierta entidad (esa entidad puede ser cualquier cosa)
+
