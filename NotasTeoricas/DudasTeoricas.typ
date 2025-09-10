@@ -11,6 +11,7 @@ mov eax, 0
 
 Es decir, si solo me interesa la parte baja pero complica mucho mas el codigo. Hay una diferencia significativa?
 
+
 == Eficiencia
 
 - Es ineficiente hacer muchas llamadas a syscalls?
@@ -18,4 +19,9 @@ Es decir, si solo me interesa la parte baja pero complica mucho mas el codigo. H
   Entiendo que si es una sola syscall, quiere decir que tengo que guardar espacio suficiente para que me entre el arreglo entero, que seria tener mucho espacio en simultaneo, pero igualmente quiero saber hasta que punto eso es una desventaja contra hacer syscall una por una
 
 _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo mejor seria correr ambas opciones y hacer el profiler_
+
+
+== Compresion de archivos
+
+- Como funciona la compresion de archivos?
 
