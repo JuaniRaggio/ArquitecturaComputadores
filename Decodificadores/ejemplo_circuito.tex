@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{circuitikz}
+\usetikzlibrary{positioning} % <- NECESARIO
+
+\begin{document}
+\begin{tikzpicture}[node distance=3cm]
+    % CPU
+    \node[draw, rectangle, minimum width=2cm, minimum height=1.5cm] (cpu) {CPU};
+
+    % Decodificador a la derecha
+    \node[draw, rectangle, minimum width=2cm, minimum height=1.5cm, right=of cpu] (dec) {Decodificador};
+
+    % RAM debajo del decodificador
+    \node[draw, rectangle, minimum width=2cm, minimum height=1.5cm, below=of dec] (ram) {RAM};
+
+    % Conexiones
+    \draw[-latex] (cpu) -- (dec);
+    \draw[-latex] (dec) -- (ram);
+\end{tikzpicture}
+\end{document}
