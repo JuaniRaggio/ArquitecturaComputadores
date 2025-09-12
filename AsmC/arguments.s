@@ -62,7 +62,7 @@ main:
 	;; tenia al entrar a la funcion
 	lea	esp, -4[ecx]
 	ret
-	.size	main, .-main
+	.size	main, .-main	; marca el tamaño de la funcion main
 	.section	.text.__x86.get_pc_thunk.ax,"axG",@progbits,__x86.get_pc_thunk.ax,comdat
 	.globl	__x86.get_pc_thunk.ax
 	.hidden	__x86.get_pc_thunk.ax
