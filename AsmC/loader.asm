@@ -2,14 +2,8 @@
 section .text
         global _start
 _start:
-
-        ;; Armado de stack frame
-        push ebp
-        mov ebp, esp
         call main               ; Suponiendo que main me deja el ret en eax
-
-        ;; Desarmado de stack frame
-        mov esp, ebp
-        pop ebp
-        ret                     ; Puedo hacer directamente el ret sin mover
-                                ; nada
+;;; _start no hace ret, sino que tiene que hacer el sys_exit
+        mov ebx, eax
+        mov eax, 1
+        int 80h
