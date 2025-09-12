@@ -111,8 +111,20 @@ main:
 
 La representacion de -16 en hexadecimal es: *0xFFFFFFF0* (en 32 bits)
 
+\
+
+= GOT - Global Offset Table
+Es una tabla en memoria (sección especial del binario) que guarda direcciones absolutas de variables y funciones globales cuando un programa está compilado en modo PIC/PIE (Position Independent Code/Executable).
 
 
+= PLT - Procedure Linkage Table
+_Es como un cacheo de funciones, una vez llamaste a una funcion, la proxima vez que la llames va a ser mas rapido porque ya esta guardada en el GOT_
+
+- Sirve para llamadas a funciones externas
+- Usa el GOT como apoyo:
+  - Cada entrada del PLT tiene un salto indirecto a una direccion guardada en el GOT
+  - La *primera vez* que llamas a printf, el PLT pasa por el *resolver* que busca printf en las librerias dinamicas y *escribe la direccion real en el GOT*
+  - *Desde la segunda llamada*, se *salta directamente* a la direccion guardada -> *mucho mas rapido*
 
 
 

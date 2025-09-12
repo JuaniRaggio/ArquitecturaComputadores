@@ -25,7 +25,10 @@ main:
 	push	ebx		; Backup de registros
 	push	ecx
 
-	;; Obtener la direccion de la Global Offset Table, en EAX
+	;; Obtener la direccion de la Global Offset Table (GOT), en EAX
+	;; Guarda direcciones absolutas de variables y funciones globales cuando
+	;; un programa esta compilando en modo PIC/PIE (position independent
+	;; code/executable)
 	call	__x86.get_pc_thunk.ax
 	add	eax, OFFSET FLAT:_GLOBAL_OFFSET_TABLE_
 
