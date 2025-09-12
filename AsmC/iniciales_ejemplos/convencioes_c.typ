@@ -1,6 +1,7 @@
 = Llamadas de Assembler a C
 Este camino es el más fácil de entender. Si recordamos que al final de cuentas, una función en C es una dirección de memoria, no debería ser difícil hacer una llamada desde ASM a C. Vamos a utilizar el programa nasm para compilar los archivos en asm, gcc para compilar los archivos en C y también para linkeditarlos entre sí y contra la biblioteca estándar de C
 
+\
 
 == Como compilar y correr archivos en asm + c?
 
@@ -22,6 +23,7 @@ La directiva *-f elf32* le indica a nasm que genere un archivo objeto con format
   Ya que ahora estamos en un entorno de C. De que otra forma se podria haber terminado el programa?
   - Con exit(1); desde C
 
+\
 
 = Ejemplo 2
 - En este ejemplo vamos a pasar un valor a su representacion en ASCII 
@@ -41,6 +43,8 @@ Entonces para llamar a la funcion primero se pushean al stack los argumentos var
 int puts(const char * str);
 ```
 
+\
+
 == Preguntas
 
 1. Porqué se le suma al stack, luego de llamar a la función sprintf, 12 bytes? ¿Porqué se hace lo mismo luego de llamar a puts?
@@ -52,6 +56,7 @@ int puts(const char * str);
 
   - void(?
 
+\
 
 = Registros a preservar entre llamadas
 
@@ -65,9 +70,53 @@ Entre llamadas de C, hay ciertos registros que las funciones deben preservar par
 
 Es decir, cuando una funcion termina, *debe dejar exactamente los registros anteriores como los recibio*
 
+\
 
 = Stack Frame
 
 Es parte de la ABI de C, cuando se entra a una funcion, se arma esta estructura.
+
+\
+
+= Alineamiento a palabra
+El procesador cada vez que accede a memoria, lo hace *leyendo y escribiendo siempre 4 bytes*
+
+- Cuando el procesador accede a un *dato desalineado*, debe hacer *dos lecturas*, una para pedir la primer porcion de los datos, y otra para la segunda porcion
+
+- Para la escritura requiere mas operaciones, debe:
+
+  + Leer memoria para salvar el dato que no va a sobreescribir
+  + Combinarlo con el dato que si va a escribir para la primera porcion
+  + Recuperar el dato de la segunda porcion para escribir la segunda porcion
+
+
+Una forma facil de arreglar este problema, es negar los ultimos 4 bits. Como el stack crece hacia menores valores de esp, seguro esa posicion va a estar por detras del puntero actual. De esta forma se puede hacer un acceso a memoria mas eficiente
+
+
+```yasm
+
+GLOBAL main
+ALIGN 4
+main:
+  push ebp
+  mov ebp, esp
+  ;declaración de variables
+  and esp, -16
+  ;... programa
+  mov esp, ebp
+  pop ebp
+  ret
+
+```
+
+La representacion de -16 en hexadecimal es: *0xFFFFFFF0* (en 32 bits)
+
+
+
+
+
+
+
+
 
 
