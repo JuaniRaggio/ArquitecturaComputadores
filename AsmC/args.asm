@@ -4,16 +4,12 @@ extern printf
 section .rodata
         fmt db "Cantidad de argumentos: %d\n", 0
 
-section .data
-        buffer db 32
-
 section .text
 main:
 ;;; Imprimir cantidad de argumentos y cada uno de los argumentos
-        push ebp                ;Armado de stack frame
+        pushad                  ; Guardo backup de registros
         mov ebp, esp
 
-        pushad                  ; Guardo backup de registros
         mov ecx, 8              ; Inicializo "sumador" en 0
         mov edi, 0
 
@@ -31,8 +27,7 @@ print_args:
         cmp edi, [ebp + 8]      ; Comparo el contador con argc
         jne print_args
 
+        mov esp, ebp            ; Desarmado de stack frame
         popad                   ; Backup registros
         mov eax, 0              ; Retorno
-        mov esp, ebp            ; Desarmado de stack frame
-        pop ebp
         ret
