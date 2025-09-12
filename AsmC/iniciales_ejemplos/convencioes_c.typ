@@ -186,6 +186,116 @@ sys_write:
 
 \
 
+= Variables
+
+Hasta ahora, siempre que hizo falta reservamos espacio en la zona de datos de un programa. Por ejemplo, para guardar una variable. Pero, que ocurre si una funcion es recursiva?
+
+Como hace C para que las variables automaticas solo vivan en el scope de la funcion? La srespuesta es guardar esas variables en el stack, asi cuando un stack frame se destruye, al mismo tiempo se libera la memoria utilizada para sus variables
+
+\
+
+== Ejemplo 4
+
+```c
+// suma.c
+
+int suma(int a, int b) {
+  int resultado;
+  resultado = a + b;
+  return resultado
+}
+```
+
+Una traduccion literal de C a Assembler seria (sin optimizaciones):
+
+```yasm
+
+suma:
+    push ebp
+    mov ebp, esp
+    sub esp, 16 ;reservar espacio para las variables
+    mov eax, DWORD PTR [ebp+12]
+    mov edx, DWORD PTR [ebp+8]
+    add eax, edx
+    mov [ebp-4], eax ; resultado
+    mov eax, [ebp-4]
+    leave ;otra forma de desarmar el stack frame
+    ret
+
+```
+
+- No se debe devolver un arreglo local a una funcion como valor de retorno porque estarias leakeando la direccion de memoria de tu programa
+
+- Porque gcc reserva espacio extra
+
+- Porque es una traduccion literal de C a Assembler
+
+\
+
+== Ejemplo 5
+
+General la salida en Assembler con GCC de la siguiente funcion:
+
+```c
+// factorial.c
+
+int factorial(int n) {
+  if (n == 0)
+    return 1;
+  int factorial_n_1 = factorial(n - 1);
+  return n * factorial_n_1;
+}
+
+```
+
+_Salida en asm usando el comando:  *gcc -c factorial.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel*_
+
+```yasm
+	.file	"factorial.c"
+	.intel_syntax noprefix
+	.text
+	.globl	factorial
+	.type	factorial, @function
+factorial:
+	push	ebp
+	mov	ebp, esp
+	sub	esp, 24
+	call	__x86.get_pc_thunk.ax
+	add	eax, OFFSET FLAT:_GLOBAL_OFFSET_TABLE_
+	cmp	DWORD PTR 8[ebp], 0
+	jne	.L2
+	mov	eax, 1
+	jmp	.L3
+.L2:
+	mov	eax, DWORD PTR 8[ebp]
+	sub	eax, 1
+	sub	esp, 12
+	push	eax
+	call	factorial
+	add	esp, 16
+	mov	DWORD PTR -12[ebp], eax
+	mov	eax, DWORD PTR 8[ebp]
+	imul	eax, DWORD PTR -12[ebp]
+.L3:
+	leave
+	ret
+	.size	factorial, .-factorial
+	.section	.text.__x86.get_pc_thunk.ax,"axG",@progbits,__x86.get_pc_thunk.ax,comdat
+	.globl	__x86.get_pc_thunk.ax
+	.hidden	__x86.get_pc_thunk.ax
+	.type	__x86.get_pc_thunk.ax, @function
+__x86.get_pc_thunk.ax:
+	mov	eax, DWORD PTR [esp]
+	ret
+	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0"
+	.section	.note.GNU-stack,"",@progbits
+```
+
+
+
+
+
+
 
 
 
