@@ -126,6 +126,67 @@ _Es como un cacheo de funciones, una vez llamaste a una funcion, la proxima vez 
   - La *primera vez* que llamas a printf, el PLT pasa por el *resolver* que busca printf en las librerias dinamicas y *escribe la direccion real en el GOT*
   - *Desde la segunda llamada*, se *salta directamente* a la direccion guardada -> *mucho mas rapido*
 
+\
+
+= Llamadas de C a Assembler
+  - Este camino tiene una *aplicacion mas practica*
+  - Porque programar en Assembler cuando se tiene un lenguaje mas eficiente, practico y liviano?
+  - Salvo que no exista un compilador, evitaremos programar en Assembler
+  - Las funciones a fin de cuentas son direcciones, asi que es posible llamar a funciones desde C hacia Assembler
+
+
+== Ejemplo
+Si no contamos con una bibilioteca estandar que acceda a la API del SO para enviar o recibir informacion, deberia ser implementado por nosotros. Ya vimos como comunicarnos con el SO completamente en Assembler (con systemcalls), ahora tendremos que hacer nosotros una funcion auxiliar para comunicarnos a traves de C.
+
+El PID (Process ID) es un numero que utiliza Linux para identificar los procesos que estan corriendo. Si se corre el comando *ps x*, se puede ver una lista de los procesos que estan corriendo actualmente que son del usuario. Obviamente, como *ps* es un proceso, tambien aparece en la lista.
+
+_No hay ninguna funcion estandar que informe cual es el *pid* de un programa. Como es informacion que maneja el OS, habra que pedirsela a el_
+
+\
+
+= Recepcion de parametros
+
+Tambien es necesario poder acceder a los argumentos de las funciones, por ejemplo si se implementara la funcion puts en una biblioteca de funciones, seria algo equivalente a:
+
+```c
+// libc.c
+
+#define STDOUT 1
+
+int sys_write(int fd, void * buffer, int size);
+
+int puts(const char * str) {
+  int len = strlen(str);
+  return sys_write(STDOUT, (void *) str, len);
+}
+```
+
+La implementacion de la funcion sys_write ya la hice varias veces pero en este caso particular, con esta firma, podria ser asi:
+
+```yasm
+
+; libasm.asm
+GLOBAL sys_write
+ALIGN 4
+sys_write:
+        push ebp
+        mov ebp, esp
+        push ebx ;preservar ebx
+        mov eax, 0x4
+        mov ebx, [ebp+8] ;fd
+        mov ecx, [ebp+12] ;buffer
+        mov edx, [ebp+16] ;length
+        int 0x80
+        pop ebx
+        mov esp, ebp
+        pop ebp
+        ret
+
+```
+
+\
+
+
 
 
 

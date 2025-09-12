@@ -25,3 +25,4 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 
 - Como funciona la compresion de archivos?
 
+
