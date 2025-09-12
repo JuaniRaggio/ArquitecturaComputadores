@@ -21,7 +21,7 @@ factorial:
 .L2:
 	mov	eax, DWORD PTR 8[ebp]
 	sub	eax, 1
-	sub	esp, 12
+	sub	esp, 12		; Aca esta reservando espacio para fac_n_1
 	push	eax
 	call	factorial
 	add	esp, 16
