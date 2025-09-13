@@ -9,12 +9,14 @@ struct parametro {
     char caracter2;
 };
 
-void recibidor_x_copia(struct parametro arg) {
+struct parametro recibidor_x_copia(struct parametro arg) {
     // printf("Copia probando acceso:\nCaracter1: %c\nNumero1: %d\nCaracter2: %c", arg.caracter1, arg.numero1, arg.caracter2);
+    return arg;
 }
 
-void recibidor_x_referencia(struct parametro * arg) {
+struct parametro * recibidor_x_referencia(struct parametro * arg) {
     // printf("Referencia probando acceso:\nCaracter1: %c\nNumero1: %d\nCaracter2: %c", arg->caracter1, arg->numero1, arg->caracter2);
+    return arg;
 }
 
 int main(void) {
