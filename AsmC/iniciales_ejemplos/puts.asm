@@ -11,7 +11,7 @@ puts:
         push    ebp
         mov     ebp, esp
         ;; No es necesario hacer backup de eax porque es donde vamos a ret
-        push    dword ptr [ebp + 8] ; pusheo el string a leer
+        push    dword [ebp + 8] ; pusheo el string a leer
         call    strlen
 
         ;; Pusheo parametros en orden inverso al que se reciben en sys_write
