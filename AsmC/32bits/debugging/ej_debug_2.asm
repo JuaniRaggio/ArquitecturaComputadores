@@ -12,7 +12,9 @@ main:
      push fmt
      push buffer
      call sprintf
-     and esp, 3*4
+
+     ;; Aca habia un and en vez de un add
+     add esp, 3*4
      push buffer
      call puts
      add esp,4

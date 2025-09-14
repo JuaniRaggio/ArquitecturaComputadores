@@ -4,8 +4,9 @@
 GLOBAL main
 EXTERN printf
 
+;; Este comentario es incorrecto porque el string es constante y el puntero es constante asique tiene sentido que sea rodata ------> El primer problema aca es que .rodata es readonly pero %d varia
 section .rodata
-fmtA db "argc: %d",10,  0
+fmtA db "argc: %d", 10,  0
 fmtB db "argv[%d] = %s", 10, 0
 
 section .text
@@ -28,10 +29,12 @@ main:
 
     push    ecx  ; backup
 
-    push    eax  ; *argv
 
-    push    fmtB ; formato
+    ;; El segundo problema era que estaban mal ordenados los parametros
+    ;; en la pila para llamar a la funcion printf
+    push    eax  ; *argv
     push    ebx
+    push    fmtB ; formato
     call    printf
     add     esp,4*3 ; borramos los datos usados de la pila
 
