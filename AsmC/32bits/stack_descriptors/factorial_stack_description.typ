@@ -43,9 +43,7 @@ int factorial(int n) {
   top + center,
   scope: "parent",
   float: true,
-  text()[
-= Pila luego de haber invocado de factorial con n = 3
-  ],
+  text()[= Pila luego de haber invocado de factorial con n = 3],
 )
 
 #align(center)[== Pre-retorno]
