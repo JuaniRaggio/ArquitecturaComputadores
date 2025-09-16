@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <assert.h>
 
 extern int check_long(char * vector, int length);
@@ -15,5 +16,5 @@ int main(void) {
     // Check incorrecto (parametro mayor por 1)
     assert(-1 == check_long("Hello world!", 13));
 
-    printf("OK!");
+    printf("OK!\n");
 }

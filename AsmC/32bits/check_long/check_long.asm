@@ -42,17 +42,17 @@ end:
 error:
         ;; write syscall
         mov eax, 4
-        mov ebx, 1
-        mov ecx, error
+        mov ebx, 2              ; En stderr
+        mov ecx, error_msg
         mov edx, error_length
         int 80h
         ;; exit_syscall
         mov eax, 1
-        mov ebx, 1
+        mov ebx, 1              ; Codigo de error con el que exitea
         int 80h
 
         section .data
-        error db "Demasiados caracteres, hubo overflow!", 10
-        error_length equ $ - error
-msg:    db "Hola Mundo", 0
-len:    db 10
+        error_msg db "Demasiados caracteres, hubo overflow!", 10
+        error_length equ $ - error_msg
+;; msg:    db "Hola Mundo", 0
+;; len:    db 10
