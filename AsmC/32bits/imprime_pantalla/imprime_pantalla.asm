@@ -47,6 +47,12 @@ imprime_pantalla:
         push    dword cols * (rows - 1) ; Ultimo renglon
         call    .cp_str
 
+        mov     eax, 4
+        mov     ebx, 1
+        mov     ecx, buffer
+        mov     edx, rows * cols
+        int     80h
+
         add     esp, 12           ; Limpio el stack para popear backups
                                   ; y dejarlo igual que cuando se llamo
                                   ; a esta funcion
