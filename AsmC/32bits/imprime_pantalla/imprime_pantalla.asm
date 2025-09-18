@@ -1,3 +1,4 @@
+;;; Falta hacer la parte de error
         global imprime_pantalla
         section .text
 
