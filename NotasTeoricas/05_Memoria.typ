@@ -624,3 +624,28 @@ _En *Intel*_
 
 - La "interfaz" que esta entre la memoria y el CPU la vamos a ver en la proxima clase y se llama *circuito decodificador*
 
+\
+
+= Mapeo en memoria
+
+- Un dispositivo es manejado como una o varias posiciones de memoria
+
+- Cada posicion de memoria puede ser un registro interno diferente del disp.
+
+== Ventajas:
+
+- Se utilizan las instrucciones de acceso a memoria, por lo tanto las alternativas de programacion son mayores por tener mayor cantidad de instrucciones para manejo de memoria
+
+- Se modifica directamente los registros del periferico sin necesidad de obtener el valor con las intrucciones *IN* y *OUT*
+
+== Desvantajas:
+
+- Reduce cantidad de memoria
+
+- El impacto es minimo relacionado con la cantidad de memoria que tienen las PC actuales
+
+
+
+
+
+
