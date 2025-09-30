@@ -1,6 +1,5 @@
 # VM Configuration file
-
-arch: "x86_64"        # fuerza VM Intel en host ARM (modo lento, pero compatible)
+arch: "x86_64"
 cpus: 2
 memory: "2GiB"
 disk: "12GiB"
@@ -10,13 +9,24 @@ images:
     arch: "x86_64"
 
 mounts:
-  - location: "~/workspace/itbaworkspace/arquitectura"
+  - location: "/Users/juaniraggio/workspace/itbaworkspace/arquitectura"
     writable: true
 
-# Paquetes esenciales en el primer arranque
 provision:
   - mode: system
     script: |
+      set -eux
       apt-get update
       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        build-essential nasm gdb strace file
+        xauth x11-apps x11-utils dbus-x11 mesa-utils \
+        build-essential nasm gdb strace file openssh-server
+
+      sed -i 's/^#\?X11Forwarding.*/X11Forwarding yes/' /etc/ssh/sshd_config
+      sed -i 's/^#\?X11UseLocalhost.*/X11UseLocalhost yes/' /etc/ssh/sshd_config
+      systemctl restart ssh
+
+      cat >/etc/profile.d/x11-indirect.sh <<'EOF'
+      if [[ "${DISPLAY:-}" == localhost:* ]]; then
+        export LIBGL_ALWAYS_INDIRECT=1
+      fi
+      EOF
