@@ -3,8 +3,8 @@ section .text
 global _start
 
 _start:
-    mov eax, esp
-    mov edx, 0
+    mov eax, esp                ; Backup esp
+    xor edx, edx                ; Inicializo edx
     .loop:
         inc edx
         add eax, 4
