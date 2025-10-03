@@ -23,6 +23,31 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 
 == Compresion de archivos
 
-- Como funciona la compresion de archivos?
+- _Como funciona la compresion de archivos?_
+  - Muchisimo texto
 
+= Decodificacion
+
+- _El mapa de I/O, es el mismo que el 'normal'?_
+  - No.
+  - Ocupa las mismas direcciones de memoria, pero no es el mismo
+  - Hay que usar el pin del Microprocesador *IO/Mem* para elegir si escribir en
+    memoria o en el mapa de entrada y salida. Hay corriente *(True) si hay que 
+    escribir en el mapa de IO*
+
+- _Se pueden dejar entradas de decodificadores sin enchufar?_
+  - Si
+  - El problema que puede traer es que haya ruido/interferencia
+  - Se resuelve conectando las entradas a *GND* que graficamente, puede
+    representarse con el siguiente simbolo:
+
+    #align(center)[```sh
+  |  
+  |
+  |  
+-----
+ ---
+  -
+"gnd"
+```]
 
