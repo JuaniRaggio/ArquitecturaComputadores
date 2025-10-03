@@ -38,10 +38,10 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 - _Se pueden dejar entradas de decodificadores sin enchufar?_
   - Si
   - El problema que puede traer es que haya ruido/interferencia
-  - Se resuelve conectando las entradas a *GND* que graficamente, puede
-    representarse con el siguiente simbolo:
-
-    #align(center)[```sh
+  - Se resuelve conectando las entradas a *ground*, esto nos genera un 0 en la
+    entrada, por lo que no habria ambiguedad del valor que tendriamos en la
+    misma. Graficamente, puede representarse con el siguiente simbolo:
+#align(center)[```sh
   |  
   |
   |  
@@ -50,4 +50,6 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
   -
 "gnd"
 ```]
+
+
 
