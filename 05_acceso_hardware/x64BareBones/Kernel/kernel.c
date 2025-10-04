@@ -1,3 +1,4 @@
+#include "video_driver.h"
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
@@ -73,6 +74,7 @@ void *initializeKernelBinary() {
 }
 
 #define GREEN_BLACK 0x20
+
 int main() {
   ncPrint("[Kernel Main]");
   ncNewline();
@@ -92,10 +94,9 @@ int main() {
   ncNewline();
 
   ncPrint("[Finished]");
+  ncNewline();
 
-  char *txt = "Arquitectura de Computadoras";
-  for (int i = 0; txt[i] != 0; ++i) {
-    ncPrintChar(txt[i], GREEN_BLACK);
-  }
+  printLn("Arquitectura de Computadoras", GREEN_BLACK);
   return 0;
 }
+

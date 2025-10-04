@@ -1,5 +1,4 @@
 /* sampleCodeModule.c */
-#include "../../Kernel/include/naiveConsole.h"
 
 char *v = (char *)0xB8000 + 79 * 2;
 
