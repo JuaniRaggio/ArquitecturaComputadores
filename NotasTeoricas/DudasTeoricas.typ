@@ -35,6 +35,9 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
     memoria o en el mapa de entrada y salida. Hay corriente *(True) si hay que 
     escribir en el mapa de IO*
 
+- _Como se si se esta escribiendo o leyendo?_
+  - Se usa el pin *R/W*
+
 - _Se pueden dejar entradas de decodificadores sin enchufar?_
   - Si
   - El problema que puede traer es que haya ruido/interferencia
