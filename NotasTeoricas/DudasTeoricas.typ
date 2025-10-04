@@ -54,5 +54,6 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 "gnd"
 ```]
 
+- _Cual es la diferencia entre un procesador Intel y uno generico?_
 
 
