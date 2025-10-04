@@ -1,9 +1,9 @@
 #include "video_driver.h"
+#include <asm>
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 #include <stdint.h>
-#include <string.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -14,8 +14,8 @@ extern uint8_t endOfKernel;
 
 static const uint64_t PageSize = 0x1000;
 
-static void *const sampleCodeModuleAddress = (void *)0x400000;
-static void *const sampleDataModuleAddress = (void *)0x500000;
+static void * const sampleCodeModuleAddress = (void *)0x400000;
+static void * const sampleDataModuleAddress = (void *)0x500000;
 
 typedef int (*EntryPoint)();
 
@@ -42,7 +42,10 @@ void *initializeKernelBinary() {
 
   ncPrint("[Loading modules]");
   ncNewline();
-  void *moduleAddresses[] = {sampleCodeModuleAddress, sampleDataModuleAddress};
+  void *moduleAddresses[] = {
+    sampleCodeModuleAddress,
+    sampleDataModuleAddress
+  };
 
   loadModules(&endOfKernelBinary, moduleAddresses);
   ncPrint("[Done]");
@@ -75,7 +78,6 @@ void *initializeKernelBinary() {
 
 // Highest 3 bits -> Background (in this case 2 -> Green)
 // Lowest 4 bits -> Foreground (in this case 0 -> Black)
-#define GREEN_BLACK 0x20
 
 int main() {
   ncPrint("[Kernel Main]");
@@ -99,6 +101,8 @@ int main() {
   ncNewline();
 
   printLn("Arquitectura de Computadoras", GREEN_BLACK);
+
+  printLn(get_current_time(), BLACK_WHITE);
+
   return 0;
 }
-

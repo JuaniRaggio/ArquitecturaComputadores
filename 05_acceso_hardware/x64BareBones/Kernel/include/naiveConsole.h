@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define BLACK_WHITE 0x0f
+#define GREEN_BLACK 0x20
+
 void ncPrint(const char * string);
 void ncPrintChar(char character, uint8_t color);
 void ncNewline();
