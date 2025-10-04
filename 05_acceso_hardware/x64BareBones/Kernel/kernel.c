@@ -73,6 +73,8 @@ void *initializeKernelBinary() {
   return getStackBase();
 }
 
+// Highest 3 bits -> Background (in this case 2 -> Green)
+// Lowest 4 bits -> Foreground (in this case 0 -> Black)
 #define GREEN_BLACK 0x20
 
 int main() {
