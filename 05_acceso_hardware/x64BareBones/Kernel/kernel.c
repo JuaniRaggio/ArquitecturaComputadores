@@ -72,6 +72,7 @@ void *initializeKernelBinary() {
   return getStackBase();
 }
 
+#define GREEN_BLACK 0x20
 int main() {
   ncPrint("[Kernel Main]");
   ncNewline();
@@ -91,5 +92,10 @@ int main() {
   ncNewline();
 
   ncPrint("[Finished]");
+
+  char *txt = "Arquitectura de Computadoras";
+  for (int i = 0; txt[i] != 0; ++i) {
+    ncPrintChar(txt[i], GREEN_BLACK);
+  }
   return 0;
 }

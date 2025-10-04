@@ -1,7 +1,8 @@
 #include <naiveConsole.h>
 #include <stdint.h>
 
-#define BLACK 0xff
+#define BLACK_WHITE 0x0f
+#define GREEN_BLACK 0x20
 
 static uint32_t uintToBase(uint64_t value, char *buffer, uint32_t base);
 
@@ -11,11 +12,18 @@ static uint8_t *currentVideo = (uint8_t *)0xB8000;
 static const uint32_t width = 80;
 static const uint32_t height = 25;
 
-void ncPrint(const char *string, uint8_t color) {
-  int i;
+// void initbuffer() {
+//     char * txt = "Arquitectura de computadoras";
+//     for (int i = 0; txt[i] != 0; i += 2) {
+//         buffer[i] = txt[i];
+//         buffer[i + 1] = GREEN_BLACK;
+//     }
+// }
 
+void ncPrint(const char *string) {
+  int i;
   for (i = 0; string[i] != 0; i++)
-    ncPrintChar(string[i], color);
+    ncPrintChar(string[i], BLACK_WHITE);
 }
 
 void ncPrintChar(char character, uint8_t color) {
@@ -26,7 +34,7 @@ void ncPrintChar(char character, uint8_t color) {
 
 void ncNewline() {
   do {
-    ncPrintChar(' ', BLACK);
+    ncPrintChar(' ', BLACK_WHITE);
   } while ((uint64_t)(currentVideo - video) % (width * 2) != 0);
 }
 
