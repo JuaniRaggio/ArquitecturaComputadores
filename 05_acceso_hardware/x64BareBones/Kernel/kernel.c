@@ -3,6 +3,7 @@
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 #include <stdint.h>
+#include <stdio.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -13,8 +14,8 @@ extern uint8_t endOfKernel;
 
 static const uint64_t PageSize = 0x1000;
 
-static void * const sampleCodeModuleAddress = (void *)0x400000;
-static void * const sampleDataModuleAddress = (void *)0x500000;
+static void *const sampleCodeModuleAddress = (void *)0x400000;
+static void *const sampleDataModuleAddress = (void *)0x500000;
 
 typedef int (*EntryPoint)();
 
@@ -41,10 +42,7 @@ void *initializeKernelBinary() {
 
   ncPrint("[Loading modules]");
   ncNewline();
-  void *moduleAddresses[] = {
-    sampleCodeModuleAddress,
-    sampleDataModuleAddress
-  };
+  void *moduleAddresses[] = {sampleCodeModuleAddress, sampleDataModuleAddress};
 
   loadModules(&endOfKernelBinary, moduleAddresses);
   ncPrint("[Done]");
@@ -75,8 +73,7 @@ void *initializeKernelBinary() {
   return getStackBase();
 }
 
-// Highest 3 bits -> Background (in this case 2 -> Green)
-// Lowest 4 bits -> Foreground (in this case 0 -> Black)
+#define TIME_FMT_LENGTH 6
 
 int main() {
   ncPrint("[Kernel Main]");
@@ -99,9 +96,18 @@ int main() {
   ncPrint("[Finished]");
   ncNewline();
 
-  printLn("Arquitectura de Computadoras", GREEN_BLACK);
-
-  printLn(get_current_time(), BLACK_WHITE);
+  // Lo hago asi porque sabemos que no va a cambiar el formato, simepre van
+  // a ser dos posiciones para las horas y dos para los minutos a menos de que
+  // seas un enfermo mental
+  char buffer[TIME_FMT_LENGTH];
+  s_time time = get_current_time();
+  buffer[0] = time.hours / 10 + '0';
+  buffer[1] = time.hours % 10 + '0';
+  buffer[2] = ':';
+  buffer[3] = time.minutes / 10 + '0';
+  buffer[4] = time.minutes % 10 + '0';
+  buffer[5] = 0;
+  printLn(buffer, BLACK_WHITE);
 
   return 0;
 }

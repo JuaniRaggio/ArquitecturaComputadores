@@ -1,9 +1,6 @@
 #include <naiveConsole.h>
 #include <stdint.h>
 
-#define BLACK_WHITE 0x0f
-#define GREEN_BLACK 0x20
-
 static uint32_t uintToBase(uint64_t value, char *buffer, uint32_t base);
 
 static char buffer[64] = {'0'};
@@ -11,14 +8,6 @@ static uint8_t *const video = (uint8_t *)0xB8000;
 static uint8_t *currentVideo = (uint8_t *)0xB8000;
 static const uint32_t width = 80;
 static const uint32_t height = 25;
-
-// void initbuffer() {
-//     char * txt = "Arquitectura de computadoras";
-//     for (int i = 0; txt[i] != 0; i += 2) {
-//         buffer[i] = txt[i];
-//         buffer[i + 1] = GREEN_BLACK;
-//     }
-// }
 
 void ncPrint(const char *string) {
   int i;
