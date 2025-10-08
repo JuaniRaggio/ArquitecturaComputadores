@@ -46,12 +46,5 @@ Los ejercicios de paginacion son todos iguales, tenemos siempre:
 
 - No poner CR3 (Posicion del directorio) en 
 
-= Preguntas
-
-- Si comprimis un archivo, el tamaño va a seguir siendo multiplo de una pagina?
-
-- Dentro de la pagina, como se gestiona la memoria?
-
-- Mi duda viene principalmente por entender el funcionamiento de malloc
 
 

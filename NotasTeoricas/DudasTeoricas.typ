@@ -57,3 +57,11 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 - _Cual es la diferencia entre un procesador Intel y uno generico?_
 
 
+= Paginacion y manejo de memoria
+
+- Si comprimis un archivo, el tamaño va a seguir siendo multiplo de una pagina?
+
+- Dentro de la pagina, como se gestiona la memoria?
+
+- Mi duda viene principalmente por entender el funcionamiento de malloc
+
