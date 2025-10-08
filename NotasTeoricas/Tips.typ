@@ -24,3 +24,27 @@ _Las opciones son:_
 
 - qword $->$ 8 bytes
 
+
+= Registros que se preservan:
+
+- edx
+- esi
+- edi
+- ebp
+- esp
+
+= Paginacion
+
+== Que pasa si me piden de 64 bits?
+
+- Es lo mismo, lo que cambia es el ancho
+
+- $"Lo que ocupa una pagina" - 1 ->$ tiene que ser el valor maximo obtenido
+  con todos los bits del offset encendidos en 1
+
+
+- Su sistema de 64 bits necesita 2MB
+
+- Paginas alineadas a 2MB $->$ necesitas si o si 21 bits para offset porque
+  sino no podes llegar al final de la pagina
+
