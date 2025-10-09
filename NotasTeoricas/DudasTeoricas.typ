@@ -77,7 +77,11 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
   - Mi duda viene principalmente por entender el funcionamiento de malloc
 
 
-- [ ] El registro CR3 me dice la direccion donde esta la tabla de directorio,
+- [X] El registro CR3 me dice la direccion donde esta la tabla de directorio,
   pero la direccion virtual o la fisica?
+    - *Fisica*
+
+- [X] Pero le corresponde a las tablas tener una direccion virtual?
+    - *Si*
 
 
