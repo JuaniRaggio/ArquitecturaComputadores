@@ -480,7 +480,7 @@ registoros._
 = Decodificacion
 
 #importante[
-  El pin IO/Mem del microprocesador:
+  El pin IO/Mem del microprocesador (*Solo esta en procesadores Intel*):
   - Selecciona si escribir en memoria o en el mapa de I/O
   - Tiene corriente (True) si hay que escribir en el mapa de I/O
 ]
