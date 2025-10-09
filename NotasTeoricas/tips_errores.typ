@@ -427,15 +427,44 @@ registoros._
   - Para encontrar direcciones especificas se usan scripts
 ]
 
+// csilvadiniz@itba.edu.ar
+
+\
+\
+\
+
 #nota[
   _Como se ve el Canary en codigo assembler?_
   - En *64 bits*:
   ```yasm
+    ;; ... (Armado de stackframe incluido)
+    mov	rax, QWORD PTR fs:40    ; Guardo copia del canary a rax
 
+    mov	QWORD PTR -8[rbp], rax  ; Pusheo a partir del rbp (justo encima como
+                                ; estamos en 64 bits, cada dir es de 8 Bytes)
+    ;; ...
+    mov	rdx, QWORD PTR -8[rbp]  ; Leo la copia del canary
+    sub	rdx, QWORD PTR fs:40    ; Hago la resta entre el canary original y lo
+                                ; que me quedo en la copia del canary
+    je	.L7                     ; En caso de que hayan sido iguales, no llamo a error
+    call	__stack_chk_fail@PLT  ; Si no salto, se llama a la funcion de error
+    .L7
+    ;; ...
   ```
   - En *32 bits*:
   ```yasm
+    mov     eax, DWORD PTR __stack_chk_guard  ; Cargar el Canary
+    mov     DWORD PTR [ebp - 4], eax          ; Guardar el canary al final del stack
 
+    ; ... -> (funciones sin limite, en las que puede haber OF)
+
+    ; luego de la funcion sin limite, checkeamos el valor del canary para ver si se piso o podemos retornar correctamente
+    mov     eax, DWORD PTR __stack_chk_guard  ; valor original del canary
+    cmp     eax, DWORD PTR [ebp - 4]          ; comparamos el original con lo que tenemos en el stack
+    jne     .stack_smash_detected
+
+  .stack_smash_detected:
+    call    __stack_chk_fail                  ; abortamos el programa
   ```
 ]
 
