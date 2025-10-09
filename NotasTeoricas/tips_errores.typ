@@ -365,10 +365,19 @@ registoros._
   Las paginas siempre empiezan en multiplos de tamano de pagina (esto quiere decir que estan alineadas).
 ]
 
+#importante[
+  *Atributos de tablas*
+  - Las tablas de directiorios tienen atributos, si una tabla de directorio
+    tiene el atributo de presente en off, quiere decir que la tabla de pagina
+    a la que te lleva, no esta presente, entonces no es necesario apagar
+    todos los otros Ps
+  - Las tablas de paginas tambien tienen los mismos atributos
+]
+
 == Ejercicios de Paginacion
 
 #tip[
-  Todos los ejercicios de paginacion siguen el mismo patron:
+  _Todos los ejercicios de paginacion siguen el mismo patron:_
   - Mapa virtual: su tamano depende del bus de address del procesador
   - Mapa fisico: su tamano depende de la cantidad de RAM
   - Registro CR3: contiene la *direccion fisica* de la *tabla de directorio*
@@ -416,6 +425,18 @@ registoros._
   - Sigue pasando en otros lenguajes
   - Si un programa se puede romper con un error, esta mal programado
   - Para encontrar direcciones especificas se usan scripts
+]
+
+#nota[
+  _Como se ve el Canary en codigo assembler?_
+  - En *64 bits*:
+  ```yasm
+
+  ```
+  - En *32 bits*:
+  ```yasm
+
+  ```
 ]
 
 = Interrupciones
@@ -490,6 +511,12 @@ registoros._
   - El pin de *READ* va enchufado tanto en la *RAM* como en la *ROM*
   - El pin de *WRITE* va enchufado solo en la *RAM*, si lo enchufas en la ROM
     es incorrecto (en parciales bajan puntos)
+]
+
+#nota[
+  Las tablas estan mapeadas en memoria virtual pero no es necesario ponerlas
+  porque lo hace el kernel (Incluso si me piden que meta todo lo que esta en
+  el mapa virtual, implicitamente puedo suponer que me hablan de user space)
 ]
 
 #tip[
