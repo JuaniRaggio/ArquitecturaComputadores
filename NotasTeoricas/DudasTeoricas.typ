@@ -2,7 +2,11 @@
 
 == Stack
 
-- [ ] El Canary si *no esta explicito en el .asm*
+- [X] El Canary si *no esta explicito en el .asm*
+  En tal caso, no se agrega a la pila. El unico caso en el que tenemos que 
+  agregarlo sin que este explicito es cuando nos pasan un codigo de C, en una
+  funcion que contiene buffer y no compilan con el flag que evita la 
+  proteccion de stack
 
 == Eficiencia
 
@@ -55,7 +59,7 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
   - Los procesadores genericos no tienen "parte baja y alta", sino que 
     siempre tratan todo como 'tamaño de bus'
 
-- [ ] En caso de tener un procesador Intel de BD = 16, pero tengo una RAM
+- [X] En caso de tener un procesador Intel de BD = 16, pero tengo una RAM
   que tiene un _ancho de 8 bits_, podria poner una cantidad impar de las
   mismas? por ejemplo 1
 
@@ -65,11 +69,15 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 
 == Paginacion y manejo de memoria
 
-- [ ] Si comprimis un archivo, el tamaño va a seguir siendo multiplo de una pagina?
+- [ ] Si comprimis un archivo, el tamaño va a seguir siendo multiplo de una 
+  pagina?
 
 - [ ] Dentro de la pagina, como se gestiona la memoria?
 
   - Mi duda viene principalmente por entender el funcionamiento de malloc
 
+
+- [ ] El registro CR3 me dice la direccion donde esta la tabla de directorio,
+  pero la direccion virtual o la fisica?
 
 

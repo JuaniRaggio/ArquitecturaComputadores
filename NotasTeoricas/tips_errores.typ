@@ -371,7 +371,7 @@ registoros._
   Todos los ejercicios de paginacion siguen el mismo patron:
   - Mapa virtual: su tamano depende del bus de address del procesador
   - Mapa fisico: su tamano depende de la cantidad de RAM
-  - Registro CR3: contiene la posicion de la tabla de directorio
+  - Registro CR3: contiene la *direccion fisica* de la *tabla de directorio*
   - Bit P (presente): indica si esta en RAM o en disco
 ]
 
@@ -470,7 +470,7 @@ registoros._
   La MMU (Memory Management Unit) es un metodo de interposicion que checkea cada acceso a memoria.
 
   Flujo:
-  Direcciones logicas → Unidad de segmentacion → Direccion Lineal → Unidad de paginacion → Direccion fisica → Memoria fisica
+  Direcciones logicas $->$ Unidad de segmentacion $->$ Direccion Lineal $->$ Unidad de paginacion $->$ Direccion fisica $->$ Memoria fisica
 ]
 
 #tip[
@@ -487,6 +487,9 @@ registoros._
 
 #importante[
   El pin R/W indica si se esta leyendo o escribiendo.
+  - El pin de *READ* va enchufado tanto en la *RAM* como en la *ROM*
+  - El pin de *WRITE* va enchufado solo en la *RAM*, si lo enchufas en la ROM
+    es incorrecto (en parciales bajan puntos)
 ]
 
 #tip[
@@ -504,7 +507,9 @@ registoros._
 
   Genericos:
   - No tienen "parte baja y alta"
-  - Siempre tratan todo como tamano de bus
+  - Siempre tratan todo como tamano de bus. Esto quiere decir que cada 
+    "renglon" es una direccion de memoria independientemente del tamaño del
+    bus
 ]
 
 = Optimizaciones y Performance
