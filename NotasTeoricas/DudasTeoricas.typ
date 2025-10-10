@@ -10,11 +10,12 @@
 
 == Eficiencia
 
-- [ ] Es ineficiente hacer muchas llamadas a syscalls?
+- [X] Es ineficiente hacer muchas llamadas a syscalls?
   Es decir, si tengo un arreglo para printear, deberia hacer una syscall por cada item en el arreglo?
   Entiendo que si es una sola syscall, quiere decir que tengo que guardar espacio suficiente para que me entre el arreglo entero, que seria tener mucho espacio en simultaneo, pero igualmente quiero saber hasta que punto eso es una desventaja contra hacer syscall una por una
 
 _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo mejor seria correr ambas opciones y hacer el profiler_
+_Me siguen diciendo que no, sera que es cierto_
 
 
 == Compresion de archivos
@@ -69,12 +70,15 @@ _La diferencia no es notable, en caso de encontrarme en una situacion asi, lo me
 
 == Paginacion y manejo de memoria
 
-- [ ] Si comprimis un archivo, el tamaño va a seguir siendo multiplo de una 
+- [X] Si comprimis un archivo, el tamaño va a seguir siendo multiplo de una 
   pagina?
+  _En el disco no se llaman páginas si o clusters. Y por más que comprimas todo es múltiplo de un clúster._
 
-- [ ] Dentro de la pagina, como se gestiona la memoria?
+- [X] Dentro de la pagina, como se gestiona la memoria?
 
   - Mi duda viene principalmente por entender el funcionamiento de malloc
+  _No hay gestion de memoria dentro de las paginas, simplemente accedes por el
+  offset_
 
 
 - [X] El registro CR3 me dice la direccion donde esta la tabla de directorio,
