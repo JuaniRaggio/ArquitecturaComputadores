@@ -222,7 +222,7 @@ int 80h       ; NO OLVIDAR ESTO
 
 #importante[
   Registros que se deben preservar (caller-saved):
-  - `edx`
+  - `ebx`
   - `esi`
   - `edi`
   - `ebp`
