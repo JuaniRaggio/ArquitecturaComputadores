@@ -252,6 +252,17 @@ registoros._
   ```
 ]
 
+#tip[
+  Para recorrer un string (leer byte a byte con AL) e ir aumentando ESI, es
+  posible hacerlo en una sola instruccion:
+  ```yasm
+  ; Leer byte a byte de [ESI] e ir avanzando
+  cld
+  lodsb               ; AL = [ESI], ESI++
+  ; ... procesar AL ...
+  ```
+]
+
 
 = Stack y Stack Frames
 
@@ -451,6 +462,7 @@ registoros._
     .L7
     ;; ...
   ```
+
   - En *32 bits*:
   ```yasm
     mov     eax, DWORD PTR __stack_chk_guard  ; Cargar el Canary
