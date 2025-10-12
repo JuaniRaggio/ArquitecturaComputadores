@@ -247,7 +247,7 @@ registoros._
   mov eax, 0x6c6c6c6c ; Supongamos que es una direccion valida
   mov esi, eax        ; Movemos la direccion a esi (source index)
   add esi, 4          ; Es comun hacer esto cuando queremos recorrer un array
-  ;; ====== Seria exactamente igual hacer ======
+  ;; ====== Seria igual hacer (la diferencia es que eax no aumenta) ======
   lea esi, [eax + 4]  ; Notemos que es mas corto y practico
   ```
 ]
