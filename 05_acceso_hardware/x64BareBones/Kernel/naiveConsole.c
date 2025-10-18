@@ -27,11 +27,17 @@ void ncNewline() {
         } while ((uint64_t)(currentVideo - video) % (width * 2) != 0);
 }
 
-void ncPrintDec(uint64_t value) { ncPrintBase(value, 10); }
+void ncPrintDec(uint64_t value) {
+        ncPrintBase(value, 10);
+}
 
-void ncPrintHex(uint64_t value) { ncPrintBase(value, 16); }
+void ncPrintHex(uint64_t value) {
+        ncPrintBase(value, 16);
+}
 
-void ncPrintBin(uint64_t value) { ncPrintBase(value, 2); }
+void ncPrintBin(uint64_t value) {
+        ncPrintBase(value, 2);
+}
 
 void ncPrintBase(uint64_t value, uint32_t base) {
         uintToBase(value, buffer, base);
