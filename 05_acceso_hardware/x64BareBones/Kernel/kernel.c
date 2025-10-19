@@ -1,4 +1,5 @@
 #include "video_driver.h"
+#include <idtLoader.h>
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
@@ -77,6 +78,7 @@ void *initializeKernelBinary() {
 #define TIME_FMT_LENGTH 6
 
 int main() {
+        load_idt();
         ncPrint("[Kernel Main]");
         ncNewline();
         ncPrint("  Sample code module at 0x");

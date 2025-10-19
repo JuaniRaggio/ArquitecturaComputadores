@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <lib.h>
 
 void *memset(void *destination, int32_t c, uint64_t length) {
         uint8_t chr = (uint8_t)c;
@@ -42,3 +43,11 @@ void *memcpy(void *destination, const void *source, uint64_t length) {
         }
         return destination;
 }
+
+s_time get_current_time() {
+        return (s_time){
+          .hours   = get_current_hour(),
+          .minutes = get_current_minutes()
+        };
+}
+

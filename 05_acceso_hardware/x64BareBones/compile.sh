@@ -1,4 +1,4 @@
 cd Toolchain
-make
+make all
 cd ..
-make
+make all

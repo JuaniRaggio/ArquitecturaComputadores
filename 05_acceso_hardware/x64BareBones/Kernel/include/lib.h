@@ -16,10 +16,6 @@ char *cpuVendor(char *result);
 
 uint8_t get_current_hour();
 uint8_t get_current_minutes();
-
-s_time get_current_time() {
-        return (s_time){.hours   = get_current_hour(),
-                        .minutes = get_current_minutes()};
-}
+s_time get_current_time();
 
 #endif
