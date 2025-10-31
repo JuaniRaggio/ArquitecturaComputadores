@@ -1,3 +1,4 @@
 *.o
 *.pdf
 .DS_Store
+!tips_errores.pdf
