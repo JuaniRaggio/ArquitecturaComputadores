@@ -503,9 +503,10 @@
 44. Dos páginas en la memoria virtual de dos procesos distintos no pueden ser 
   exactamente la misma página en la memoria física.
 
-- [F] Si pueden ser exactamente la misma pagina, el detalle es que no pueden
-  estar en memoria RAM en simultaneo, es decir uno de los dos deberia estar
-  en disco
+- [F] Si pueden tener exactamente la misma pagina fisica, por ejemplo cuando
+  se tienen librerias compartidas, no tiene sentido que esten repetidas en
+  memoria, por lo que como optimizacion se mapean esas paginas virtuales en
+  la misma memoria fisica, entonces se evita tener repeticiones en memoria
 
 #doubt[
   Todavia no vi memoria cache
@@ -516,6 +517,22 @@
 47. La arquitectura AMD64 no es compatible con 32 bits.
 
 - [F] Si es compatible
+
+#doubt[
+  La verdad que de estas preguntas no tenia ni idea, pero creo que tienen que
+  ver con ARM y GPU que voy a ver recien ahora la teoria
+
+  48. La arquitectura se puede definir (según Intel) como la implementación de 
+    una serie de instrucciones definidas.
+  49. La compatibilidad está definida por la Arquitectura
+  50. En ARM una instrucción de salto, cuando la condición es verdadera, hace 
+    que se vacíe el pipeline.
+  51. Los pipelines son siempre de 3 niveles para mejor eficiencia.
+  52. El hecho de que todas las instrucciones ocupen lo mismo en ARM significa 
+    que no habrá desfases grandes entre distintos pipes
+  53. Si un programa tiene varios threads, es necesario que estos se corran en 
+    núcleos distintos
+][]
 
 
 
