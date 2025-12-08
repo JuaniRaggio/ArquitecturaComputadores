@@ -572,12 +572,14 @@ registoros._
   Intel:
   - Tienen parte baja y alta en registros
   - Siempre dividen la memoria en bytes
+  - Tienen pin de IO/Mem
 
   Genericos:
   - No tienen "parte baja y alta"
   - Siempre tratan todo como tamano de bus. Esto quiere decir que cada 
     "renglon" es una direccion de memoria independientemente del tamaño del
     bus
+  - Se mapean los perifericos en memoria
 ]
 
 = Optimizaciones y Performance
